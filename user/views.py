@@ -1,10 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from user.forms import LoginForm, RegisterForm
+from product.models import Comment
+from user.forms import LoginForm, RegisterForm, UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
 
 
@@ -116,35 +118,35 @@ def user_delete_comment(request, id):
     return HttpResponseRedirect('/user/mycomments')
 
 
-@login_required(login_url='/login')  # Check login
-def user_orders(request):
-    current_user = request.user
-    orders = Order.objects.filter(user_id=current_user.id)
-    context = {'orders': orders, }
-    return render(request, 'user_orders.html', context)
-
-
-@login_required(login_url='/login')  # Check login
-def user_order_detail(request, id):
-    current_user = request.user
-    order = Order.objects.get(user_id=current_user.id, id=id)
-    orderitems = OrderProduct.objects.filter(order_id=id)
-    context = {'order': order, 'orderitems': orderitems}
-    return render(request, 'user_order_detail.html', context)
-
-
-@login_required(login_url='/login')  # Check login
-def user_order_product(request):
-    current_user = request.user
-    order_product = OrderProduct.objects.filter(user_id=current_user.id).order_by('-id')
-    context = {'order_product': order_product}
-    return render(request, 'user_order_products.html', context)
-
-
-@login_required(login_url='/login')  # Check login
-def user_order_product_detail(request, id, oid):
-    current_user = request.user
-    order = Order.objects.get(user_id=current_user.id, id=oid)
-    orderitems = OrderProduct.objects.filter(id=id, user_id=current_user.id)
-    context = {'order': order, 'orderitems': orderitems, }
-    return render(request, 'user_order_detail.html', context)
+# @login_required(login_url='/login')  # Check login
+# def user_orders(request):
+#     current_user = request.user
+#     orders = Order.objects.filter(user_id=current_user.id)
+#     context = {'orders': orders, }
+#     return render(request, 'user_orders.html', context)
+#
+#
+# @login_required(login_url='/login')  # Check login
+# def user_order_detail(request, id):
+#     current_user = request.user
+#     order = Order.objects.get(user_id=current_user.id, id=id)
+#     orderitems = OrderProduct.objects.filter(order_id=id)
+#     context = {'order': order, 'orderitems': orderitems}
+#     return render(request, 'user_order_detail.html', context)
+#
+#
+# @login_required(login_url='/login')  # Check login
+# def user_order_product(request):
+#     current_user = request.user
+#     order_product = OrderProduct.objects.filter(user_id=current_user.id).order_by('-id')
+#     context = {'order_product': order_product}
+#     return render(request, 'user_order_products.html', context)
+#
+#
+# @login_required(login_url='/login')  # Check login
+# def user_order_product_detail(request, id, oid):
+#     current_user = request.user
+#     order = Order.objects.get(user_id=current_user.id, id=oid)
+#     orderitems = OrderProduct.objects.filter(id=id, user_id=current_user.id)
+#     context = {'order': order, 'orderitems': orderitems, }
+#     return render(request, 'user_order_detail.html', context)

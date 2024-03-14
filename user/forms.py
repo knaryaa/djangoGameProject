@@ -50,3 +50,19 @@ class UserUpdateForm(UserChangeForm):
             'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'first_name'}),
             'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'last_name'}),
         }
+
+# class ProductForm(ModelForm):
+#     class Meta:
+#         model = Product
+#         fields = ['category', 'title', 'keywords', 'description', 'image',
+#                   'price', 'detail']
+#         widgets = {
+#             'category': Select(attrs={'class': 'input', 'placeholder': 'Category'}, choices=Category.objects.all()),
+#             'title': TextInput(attrs={'class': 'input', 'placeholder': 'Title'}),
+#             'keywords': TextInput(attrs={'class': 'input', 'placeholder': 'Keywords'}),
+#             'description': TextInput(attrs={'class': 'input', 'placeholder': 'Description'}),
+#             'image': FileInput(attrs={'class': 'input', 'placeholder': 'Image', }),
+#             'price': TextInput(attrs={'class': 'input', 'placeholder': 'Price'}),
+#             'detail': CKEditorUploadingWidget(),
+#         }
+

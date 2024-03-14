@@ -1,10 +1,13 @@
 from django.shortcuts import render
 
+from product.models import Product
+
+
 # Create your views here.
 
 def index(request):
-    text = 'Hello World!'
-    context = {'text': text}
+    trendy_product = Product.objects.order_by('?')[:8]
+    context = {'trendy_product': trendy_product}
     return render(request, 'index.html', context)
 
 def contact(request):
