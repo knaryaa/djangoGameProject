@@ -14,12 +14,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', include('home.urls')),
-    path('', include('home.urls')),
+import home.views as home_views
+import product.views as product_views
+from djangoGameProject import settings
 
-]
+urlpatterns = [
+    path('', include('home.urls')),
+    path('home/', include('home.urls')),
+    path('product/', include('product.urls')),
+    path('order/', include('order.urls')),
+    path('user/', include('user.urls')),
+    #path("category/<int:id>/<slug:slug>", product_views.categoryProducts, name="categoryProducts"),
+    path('shop/', product_views.shop, name='shop'),
+    # path('product-details/', product_views.productDetail, name='product_detail'),
+    path("contact/", home_views.contact, name="contact"),
+    path("about/", home_views.about, name="about"),
+    path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
+
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

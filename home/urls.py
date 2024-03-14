@@ -1,5 +1,7 @@
+from django.conf.urls.static import static
 from django.urls import path
 
+from djangoGameProject import settings
 from . import views
 
 urlpatterns = [
