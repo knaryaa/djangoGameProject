@@ -1,0 +1,86 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ urun.description }} {% endblock %}
+{% block keywords %} {{ urun.keywords }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="page-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Login</h3>
+                    <span class="breadcrumb"><a href="/">Home</a>   >  Login</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            {% include 'user_panel.html' %}
+            <div class="col-lg-9 table-responsive mb-5">
+                <div class="order-summary clearfix">
+                    <div class="section-title">
+                        <h3 class="title">User Products List</h3>
+                    </div>
+                    <table class="shopping-cart-table table">
+                        <tr>
+                            <th class="text-left">
+                                <a href="/user/user_product_add" class="primary-btn">Add New Product</a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Product Name</th>
+                            <th class="text-left">Genre</th>
+                            <th class="text-left">Price</th>
+                            <th class="text-left">Sale Price</th>
+                            <th class="text-left">Image</th>
+                            <th class="text-left">Status</th>
+                            <th class="text-left">Update</th>
+                            <th class="text-left">Delete</th>
+                        </tr>
+                        {% for rs in products %}
+                            <tr>
+                                <td class="text-left"><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs }}</a></td>
+                                <td class="text-left">{{ rs.category }} </td>
+                                <td class="text-left">{{ rs.price }} </td>
+                                {% if rs.sale %}
+                                <td class="text-left">{{ rs.salePrice }} </td>
+                                    {% else %}
+                                <td class="text-left"> </td>
+
+                                {% endif %}
+                                <td class="text-left">{{ rs.image_tag }} </td>
+                                <td class="text-left">{{ rs.status }} </td>
+                                <td class="text-left"><a class="primary-btn" href="/user/update_product/{{ rs.id }}">
+                                    Update </a></td>
+                                <td class="text-left">
+                                <td class="text-left">
+                                    <a class="primary-btn" href="/user/delete_product/{{ rs.id }}"> Delete </a>
+                                    {#                                        <a class="primary-btn" href="{% url 'user:user_delete_product' rs.id %}"> Delete </a>#}
+                                    {#                                        <a class="primary-btn" href="{% url 'user_delete_product' rs.id %}"> Delete </a>#}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+
+{% endblock %}

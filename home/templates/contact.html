@@ -59,50 +59,29 @@
                                         Want to share your experience with us? Fill out the form below, and one of our
                                         representatives will get back to you as soon as possible.</p>
                                     <div class="col-lg-12">
-                                        <form id="contact-form" action="" method="post">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <fieldset>
-                                                        <input type="name" name="name" id="name"
-                                                               placeholder="Your Name..."
-                                                               autocomplete="on" required>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <fieldset>
-                                                        <input type="surname" name="surname" id="surname"
-                                                               placeholder="Your Surname..." autocomplete="on" required>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <fieldset>
-                                                        <input type="text" name="email" id="email"
-                                                               pattern="[^ @]*@[^ @]*"
-                                                               placeholder="Your E-mail..." required="">
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <fieldset>
-                                                        <input type="subject" name="subject" id="subject"
-                                                               placeholder="Subject..." autocomplete="on">
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                    <textarea name="message" id="message"
-                                                              placeholder="Your Message"></textarea>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                        <button type="submit" id="form-submit" class="orange-button">
-                                                            Send
-                                                            Message Now
-                                                        </button>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
+                       {% csrf_token %}
+                        <div class="control-group">
+                           {{ form.name }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {{ form.email }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {{ form.subject }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {{ form.message }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
+                                Message</button>
+                        </div>
+                    </form>
                                     </div>
 
                                     <ul>
@@ -117,4 +96,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

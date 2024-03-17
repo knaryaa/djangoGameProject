@@ -1,0 +1,14 @@
+<div class="col-lg-3 mb-5">
+
+    <h2 class="section-title px-5"><span class="px-2">User Profile</span></h2>
+    <a href="/user" class="dropdown-item">My Profile</a>
+    <a href="/user/myorders" class="dropdown-item">Orders</a>
+    <a href="/user/myorders_products" class="dropdown-item">Order Products</a>
+    <a href="/user/mycomments" class="dropdown-item">My Comments</a>
+    <a href="/user/myfavorites" class="dropdown-item">Favorites</a>
+    {% if user.is_superuser %}
+    <a href="/user/myproducts" class="dropdown-item">My Products</a>
+    {% endif %}
+    <a href="/user/logout" class="dropdown-item">Logout</a>
+
+</div>

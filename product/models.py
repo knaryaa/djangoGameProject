@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
@@ -56,12 +57,13 @@ class Product(models.Model):
     amount = models.IntegerField(default=0)
     detail = RichTextUploadingField()
     # detail = models.TextField()
-    status = models.CharField(max_length=10, choices=STATUS, default='False')
+    # status = models.CharField(max_length=10, choices=STATUS, default='False')
+    status = models.BooleanField(default=False)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(blank=True, unique=True)
-    # slug = AutoSlugField(populate_from='title',
-    #                      unique_with=['category__title'],)
+    # slug = models.SlugField(blank=True, unique=True)
+    slug = AutoSlugField(populate_from='title',
+                          unique_with=['category__title'],)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     reviewsCount = models.IntegerField(default=0)
 

@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=1500, blank=True)
     city = models.CharField(max_length=20, blank=True)
     country = models.CharField(max_length=20, blank=True)
-    image = models.ImageField(upload_to='images/users/', default='images/users/default.jpg')
+    image = models.ImageField(upload_to='images/users/', default='images/users/default.jpeg')
     def __str__(self):
         return self.user.username
     def user_name(self):

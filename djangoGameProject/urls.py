@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('home/', include('home.urls')),
     path('product/', include('product.urls')),
+    path('shop/search/', product_views.search, name='search'),
     path('order/', include('order.urls')),
     path('user/', include('user.urls')),
     #path("category/<int:id>/<slug:slug>", product_views.categoryProducts, name="categoryProducts"),

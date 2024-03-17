@@ -23,11 +23,17 @@ class ShopCart(models.Model):
 
     @property
     def price(self):
-        return (self.product.price)
+        if self.product.sale:
+            return (self.product.salePrice)
+        else:
+            return (self.product.price)
 
     @property
     def amount(self):
-        return (self.quantity * self.product.price)
+        if self.product.sale:
+            return (self.quantity * self.product.salePrice)
+        else:
+            return (self.quantity * self.product.price)
 
 
 class Order(models.Model):

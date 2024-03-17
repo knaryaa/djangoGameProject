@@ -32,6 +32,10 @@ def productDetail(request, id, slug):
     context = {"urun": urun, "images": images, "comments": comments}
     return render(request, 'product-details.html', context)
 
+def mostViewedProducts(request):
+    urun = Product.objects.all()
+    mostviews = urun.values('reviewsCount').distinct()
+    return mostviews
 
 def search(request):
     if request.method == 'POST':
@@ -42,14 +46,17 @@ def search(request):
             results = Product.objects.filter(title__icontains=query)
             context = {"urunler": results}
             return render(request, 'product_search.html', context)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/shop/search')
 
 
 def addComment(request, id):
+
     url = request.META.get('HTTP_REFERER')  # geldiğimiz sayfanın url bilgisini verir
     if request.method == 'POST':
         form = CommentForm(request.POST)
+        print(form)
         if form.is_valid():
+            print('addcomment')
             data = Comment()
             data.subject = form.cleaned_data['subject']
             data.comment = form.cleaned_data['comment']

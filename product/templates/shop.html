@@ -1,70 +1,60 @@
 {% extends 'homebase.html' %}
 {% load static %}
-{% block title %} {{ urunKategori.title}} {% endblock %}
-{% block description %} {{ urunKategori.description}} {% endblock %}
-{% block keywords %} {{ urunKategori.keywords}} {% endblock %}
+{% block title %} {{ urunKategori.title }} {% endblock %}
+{% block description %} {{ urunKategori.description }} {% endblock %}
+{% block keywords %} {{ urunKategori.keywords }} {% endblock %}
 {% block head %}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ setting.icon.url}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ setting.icon.url }}">
 {% endblock %}
 
 {% block body %}
 
 
 
-  <div class="page-heading header-text">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Our Shop</h3>
-          <span class="breadcrumb"><a href="/">Home</a> > Our Shop</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section trending">
-    <div class="container">
-      <ul class="trending-filter">
-        <li>
-          <a class="is_active" href="#!" data-filter="*">Show All</a>
-        </li>
-        {% for urun in urunlist %}
-            {% ifchanged %}
-            <li>
-          <a href="#!" data-filter=".{{urun.category__slug}}">{{ urun.category__slug }}</a>
-        </li>
-            {% endifchanged %}
-          {% endfor %}
-      </ul>
-      <div class="row trending-box">
-          {% for urun in urunler %}
-          <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 {{urun.category.slug}}">
-          <div class="item">
-            <div class="thumb">
-              <a href="/product/{{ urun.id }}/{{ urun.slug }}"><img src="{{ urun.image.url}}" alt=""></a>
-              <span class="price"><em>{{ urun.price }}</em> {{ urun.salePrice }}</span>
+    <div class="page-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Our Shop</h3>
+                    <span class="breadcrumb"><a href="/">Home</a> > Our Shop</span>
+                </div>
             </div>
-            <div class="down-content">
-              <span class="category">{{ urun.category }}</span>
-              <h4>{{ urun.title }}</h4>
-              <a href="/product/{{ urun.id }}/{{ urun.slug }}"><i class="fa fa-shopping-bag"></i></a>
-            </div>
-          </div>
-      </div>
-          {% endfor %}
-
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <ul class="pagination">
-          <li><a href="#"> &lt; </a></li>
-            <li><a href="#">1</a></li>
-            <li><a class="is_active" href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"> &gt; </a></li>
-          </ul>
         </div>
-      </div>
     </div>
-  </div>
+
+    <div class="section trending">
+        <div class="container">
+            <ul class="trending-filter">
+                <li>
+                    <a class="is_active" href="#!" data-filter="*">Show All</a>
+                </li>
+                {% for urun in urunlist %}
+                    {% ifchanged %}
+                        <li>
+                            <a href="#!" data-filter=".{{ urun.category__slug }}">{{ urun.category__slug }}</a>
+                        </li>
+                    {% endifchanged %}
+                {% endfor %}
+            </ul>
+            <div class="row trending-box">
+                {% for urun in urunler %}
+                    <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 {{ urun.category.slug }}">
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="/product/{{ urun.id }}/{{ urun.slug }}"><img src="{{ urun.image.url }}" alt=""></a>
+                                <span class="price">{% if urun.sale %}<em>{{ urun.price }}</em> {{ urun.salePrice }}{% else %}{{ urun.price }}</span>{% endif %}
+                            </div>
+                            <div class="down-content">
+                                <span class="category">{{ urun.category }}</span>
+                                <h4>{{ urun.title }}</h4>
+                                <a href="/order/addtocart/{{ urun.id }}"><i class="fa fa-shopping-bag"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

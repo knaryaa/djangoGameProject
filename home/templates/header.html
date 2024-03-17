@@ -1,7 +1,7 @@
 {% load static %}
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -10,21 +10,37 @@
                     <a href="/" class="logo">
                         <img src="{% static 'img/logo.png' %}" alt="" style="width: 158px;">
                     </a>
+
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="/" class="active">Home</a></li>
-                      <li><a href="/shop/">Our Shop</a></li>
-                      <li><a href="/about/">About Us</a></li>
-                      <li><a href="/contact/">Contact Us</a></li>
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a href="/shop/">Our Shop</a></li>
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
                         {% if user.is_authenticated %}
-                            <li> <a href="/user">{{ user.username.capitalize }}</a></li>
+                            <li><a href="/user">{{ user.username.capitalize }}</a></li>
                         {% else %}
-                      <li><a href="/user/login">Login</a></li>
-                      <li><a href="/user/register">Register</a></li>
+                            <li><a href="/user/login">Login</a></li>
+                            <li><a href="/user/register">Register</a></li>
                         {% endif %}
 
-                  </ul>
+                    </ul>
+                {% if user.id is not None %}
+                <a href="/order/favorites" class="btn border">
+                    <i class="fas fa-heart text-danger"></i>
+                    <span class="badge">0</span>
+                </a>
+                {% endif %}
+                <li>
+                <a href="/order/shopcart" class="btn border">
+                    <i class="fas fa-shopping-cart text-danger"></i>
+                    <span class="badge">{% if request.session.cart_items > 0 %}
+                    {{ request.session.cart_items }}
+                        {% else %}
+                        0
+                    {% endif %} </span>
+                </a></li>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -33,5 +49,5 @@
             </div>
         </div>
     </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+</header>
+<!-- ***** Header Area End ***** -->
